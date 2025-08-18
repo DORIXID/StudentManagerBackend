@@ -1,0 +1,10 @@
+package dev.vortsu.repositories;
+
+import dev.vortsu.entity.Password;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface PasswordRepository extends JpaRepository<Password, Long> {
+    Optional<Password> findById(Long id);
+}
