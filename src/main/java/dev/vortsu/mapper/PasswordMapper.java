@@ -1,17 +1,24 @@
 package dev.vortsu.mapper;
 
-import dev.vortsu.dto.PasswordDTO;
+import dev.vortsu.dto.createStudentUserPasswordDTO;
+import dev.vortsu.dto.updateStudentUserPasswordDTO;
 import dev.vortsu.entity.Password;
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import dev.vortsu.utils.PasswordEncoding;
+import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    @Mapper(componentModel = "spring")
-    public interface PasswordMapper {
+@Mapper(componentModel = "spring")
+public abstract class PasswordMapper {
 
-        @Mapping(target = "password", expression = "java(passwordEncoder.encode(dto.getPassword()))")
-        Password toEntity(PasswordDTO dto, @Context org.springframework.security.crypto.password.PasswordEncoder passwordEncoder);
+    @Autowired
+    PasswordEncoding encoder;
 
-        @Mapping(target = "password", ignore = true)
-        PasswordDTO toDto(Password student);
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "password", expression = "java(encoder.encode(dto.getPassword()))")
+    public abstract Password toEntity(createStudentUserPasswordDTO dto);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "password", expression = "java(dto.getPassword().isBlank() ? password.getPassword() : encoder.encode(dto.getPassword()))")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract void updateEntityFromPsssword(updateStudentUserPasswordDTO dto, @MappingTarget Password password);
+}

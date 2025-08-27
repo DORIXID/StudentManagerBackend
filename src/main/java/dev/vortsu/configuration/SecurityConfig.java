@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    @Bean // Если не работает на новой версии джавы, то надо зайти в класс PasswordEncoder и добавить префикс по примеру {bscrypt}
+    @Bean
     public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

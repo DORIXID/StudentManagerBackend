@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.vortsu.entity.Role;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 
 @Setter

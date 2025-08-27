@@ -29,7 +29,7 @@ public class Initializer implements CommandLineRunner {
         if (userRepository.count() == 0) {
 
             Password password = new Password();
-            password.setPassword(encoder.encode("1234"));
+            password.setPassword(encoder.encode("123456"));
 
             user = new User();
             user.setUserName("student1");
