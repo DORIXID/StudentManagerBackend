@@ -2,8 +2,8 @@ package dev.vortsu.mapper;
 
 
 import dev.vortsu.dto.UserDTO;
-import dev.vortsu.dto.createStudentUserPasswordDTO;
-import dev.vortsu.dto.updateStudentUserPasswordDTO;
+import dev.vortsu.dto.CreateStudentUserPasswordDTO;
+import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
 import dev.vortsu.entity.User;
 import org.mapstruct.*;
 
@@ -11,14 +11,11 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {PasswordMapper.class})
 public interface UserMapper {
 
-        @Mapping(source = "password.id", target = "passwordId")
-        UserDTO toDto(User student);
-
         @Mapping(target = "id", ignore = true)
         @Mapping(target = "enabled", expression = "java(true)")
         @Mapping(target = "role", expression = "java(dev.vortsu.entity.Role.STUDENT)")
         @Mapping(target = "password", source = "dto")
-        User toEntityFromUserName(createStudentUserPasswordDTO dto);
+        User toEntityFromUserName(CreateStudentUserPasswordDTO dto);
 
 
         @Mapping(target = "id", ignore = true)
@@ -27,5 +24,5 @@ public interface UserMapper {
         @Mapping(target = "role", expression = "java(dev.vortsu.entity.Role.STUDENT)")
         @Mapping(target = "password", source = "dto")
         @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-        void updateEntityFromUserName(updateStudentUserPasswordDTO dto, @MappingTarget User user);
+        void updateEntityFromUserName(UpdateStudentUserPasswordDTO dto, @MappingTarget User user);
 }

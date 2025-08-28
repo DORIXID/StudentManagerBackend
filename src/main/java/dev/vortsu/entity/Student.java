@@ -11,13 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "students")
 public class Student {
-
-    public Student(String name, String surname, Integer age) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

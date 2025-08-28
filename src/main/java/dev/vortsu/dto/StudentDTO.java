@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
 
 @Setter
 @Getter

@@ -1,14 +1,15 @@
 package dev.vortsu.services;
 
+import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
 import dev.vortsu.dto.StudentResponse;
-import dev.vortsu.dto.createStudentUserPasswordDTO;
-import dev.vortsu.dto.updateStudentUserPasswordDTO;
+import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
 import dev.vortsu.entity.Student;
 import dev.vortsu.entity.User;
 import dev.vortsu.mapper.StudentMapper;
 import dev.vortsu.repositories.StudentRepository;
 import dev.vortsu.repositories.UserRepository;
+import dev.vortsu.utils.ChekingForAccess;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -26,26 +27,34 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final UserRepository userRepository;
     private final StudentMapper studentMapper;
+    private final ChekingForAccess chekingForAccess;
 
-    public void createStudent(createStudentUserPasswordDTO dto) {
+    public void createStudent(CreateStudentUserPasswordDTO dto) {
         studentRepository.save(studentMapper.toEntityFromUserStudent(dto));
     }
 
-    public void editStudent(updateStudentUserPasswordDTO dto) {
-        //TODO:Сделать проверку на пользователя
-        if (!dto.getUserName().isBlank() && dto.getUserName().length() < 3) {
-            throw new IllegalArgumentException("Имя пользователя должно быть не менее 3 символов");
+    public void editStudent(UpdateStudentUserPasswordDTO dto, Authentication authentication) {
+        if(chekingForAccess.authenticationCheck(dto.getId(), authentication)) {
+            if (!dto.getUserName().isBlank() && dto.getUserName().length() < 3) {
+                throw new IllegalArgumentException("Имя пользователя должно быть не менее 3 символов");
+            }
+            if (!dto.getPassword().isBlank() && dto.getPassword().length() < 6) {
+                throw new IllegalArgumentException("Пароль должен быть не менее 6 символов");
+            }
+            Optional<Student> student = studentRepository.findById(dto.getId());
+            if (student.isPresent()) {
+                Student newStudent = student.get();
+                studentMapper.updateEntityFromUserStudent(dto, newStudent);
+                studentRepository.save(newStudent);
+            } else {
+                throw new EntityNotFoundException("Student with id: " + dto.getId() + " was not found");
+            }
         }
-        if (!dto.getPassword().isBlank() && dto.getPassword().length() < 6) {
-            throw new IllegalArgumentException("Пароль должен быть не менее 6 символов");
-        }
-        Optional<Student> student = studentRepository.findById(dto.getId());
-        if (student.isPresent()){
-            Student newStudent = student.get();
-            studentMapper.updateEntityFromUserStudent(dto, newStudent);
-            studentRepository.save(newStudent);
-        } else {
-            throw new EntityNotFoundException("Student with id: " + dto.getId() + " was not found");
+    }
+
+    public void deleteStudent(Long id, Authentication authentication) {
+        if(chekingForAccess.authenticationCheck(id, authentication)){
+            studentRepository.deleteById(id);
         }
     }
 

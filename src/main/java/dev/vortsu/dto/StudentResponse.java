@@ -1,7 +1,6 @@
 package dev.vortsu.dto;
 
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 

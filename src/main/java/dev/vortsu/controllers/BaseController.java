@@ -1,7 +1,9 @@
 package dev.vortsu.controllers;
 
-import dev.vortsu.dto.createStudentUserPasswordDTO;
-import dev.vortsu.dto.updateStudentUserPasswordDTO;
+import dev.vortsu.dto.CreateStudentUserPasswordDTO;
+import dev.vortsu.dto.StudentDTO;
+import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
+import dev.vortsu.entity.Student;
 import dev.vortsu.services.StudentService;
 
 import dev.vortsu.dto.StudentResponse;
@@ -27,13 +29,18 @@ public class BaseController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "students", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createStudent(@Validated @RequestBody createStudentUserPasswordDTO newStudent)  {
+    public void createStudent(@Validated @RequestBody CreateStudentUserPasswordDTO newStudent)  {
         studentService.createStudent(newStudent);
     }
 
-    @PutMapping(value="students",  consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void editStudent(@Validated @RequestBody updateStudentUserPasswordDTO newStudent)  {
-        studentService.editStudent(newStudent);
+    @PatchMapping(value="students", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editStudent(@Validated @RequestBody UpdateStudentUserPasswordDTO newStudent, Authentication authentication)  {
+        studentService.editStudent(newStudent, authentication);
+    }
+
+    @DeleteMapping(value = "students",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteStudent(@Validated @RequestBody Student student, Authentication authentication)  {
+        studentService.deleteStudent(student.getId(), authentication);
     }
 
     @GetMapping("students")
