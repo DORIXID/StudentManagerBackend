@@ -11,6 +11,10 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     Page<Student> findByNameContainingIgnoreCase(String name, Pageable pagable);
 
+    //TODO: Прошерстить весь код и узнать как работает ВСЕ
+    //как пейдж переиспользовать узнать про темплейты
+    //    @JPQL
+    //    //TODO как пейдж работает почитать
     Page<Student> findBySurnameContainingIgnoreCase(String surname, Pageable pagable);
 
     Page<Student> findByAge(int age, Pageable pageable);

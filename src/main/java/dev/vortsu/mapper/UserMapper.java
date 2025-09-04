@@ -7,7 +7,7 @@ import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
 import dev.vortsu.entity.User;
 import org.mapstruct.*;
 
-
+//TODO: не использовать camel case
 @Mapper(componentModel = "spring", uses = {PasswordMapper.class})
 public interface UserMapper {
 

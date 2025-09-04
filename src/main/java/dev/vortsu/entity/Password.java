@@ -12,6 +12,7 @@ import lombok.*;
 @Table(name = "passwords")
 public class Password {
 
+    //TODO: добавить дтохам приписку Entity
     private String password;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

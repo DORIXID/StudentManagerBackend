@@ -43,6 +43,7 @@ public class BaseController {
         studentService.deleteStudent(student.getId(), authentication);
     }
 
+    //TODO: Возможно добавить эндпоинт для обновления пароля и прочего
     @GetMapping("students")
     public StudentResponse getAllStudents(
             @RequestParam(defaultValue = "0") Integer page,

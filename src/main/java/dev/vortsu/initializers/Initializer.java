@@ -86,7 +86,5 @@ public class Initializer implements CommandLineRunner {
             user.setPassword(password);
             userRepository.save(user);
         }
-
-
     }
 }

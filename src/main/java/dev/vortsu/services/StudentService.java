@@ -11,6 +11,7 @@ import dev.vortsu.repositories.StudentRepository;
 import dev.vortsu.repositories.UserRepository;
 import dev.vortsu.utils.ChekingForAccess;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional//TODO: сделать для каждого метода свой уровень проверки транзакции
 @RequiredArgsConstructor
 public class StudentService {
 
@@ -33,6 +35,7 @@ public class StudentService {
         studentRepository.save(studentMapper.toEntityFromUserStudent(dto));
     }
 
+    //TODO:кастомная валидация сделать
     public void editStudent(UpdateStudentUserPasswordDTO dto, Authentication authentication) {
         if(chekingForAccess.authenticationCheck(dto.getId(), authentication)) {
             if (!dto.getUserName().isBlank() && dto.getUserName().length() < 3) {
@@ -42,6 +45,7 @@ public class StudentService {
                 throw new IllegalArgumentException("Пароль должен быть не менее 6 символов");
             }
             Optional<Student> student = studentRepository.findById(dto.getId());
+            //TODO: потичать как с optional работать
             if (student.isPresent()) {
                 Student newStudent = student.get();
                 studentMapper.updateEntityFromUserStudent(dto, newStudent);
@@ -60,6 +64,8 @@ public class StudentService {
 
     public StudentResponse getAllStudents(Integer page, Integer limit, String sortBy, String searchedType, String searchedValue, Authentication authentication) {
 
+
+        //TODO: Principal, что в нем лежит, документацию спринга
         String userName = authentication.getName();
         User user = userRepository.findByUserName(userName).orElseThrow(() -> new IllegalArgumentException("User with name: " + userName + " was not found"));
         boolean isAdminOrTeacher = authentication.getAuthorities().stream()
@@ -77,6 +83,7 @@ public class StudentService {
             if (searchedType == null || searchedValue == null || searchedValue.isBlank()) {
                 pageResult = studentRepository.findAll(pageable);
             } else {
+                //TODO: сделать в один запрос - копипаста
                 switch (searchedType) {
                     case "name":
                         pageResult = studentRepository.findByNameContainingIgnoreCase(searchedValue, pageable);
@@ -100,6 +107,8 @@ public class StudentService {
             for (Student student : pageResult) {
                 studentsDtoList.add(studentMapper.toDto(student));
             }
+            //TODO: обернуть в 1 сущность и так передавать, а то на 10 строчке и 14(15?) по дэбильному сделано, вроде как он говорил, что маппер сам это делать должен
+            //TODO: Маппер сам должен возвращать StudentResponse
             return new StudentResponse(studentsDtoList, pageResult.getTotalElements(), pageResult.getTotalPages(), pageResult.getNumber(), pageResult.getSize());
         } else {
             Student studentOfUser = studentRepository.findByUser(user).orElseThrow(() -> new EntityNotFoundException("Student with name: " + userName + " was not found"));

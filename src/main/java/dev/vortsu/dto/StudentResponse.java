@@ -25,6 +25,8 @@ public class StudentResponse{
     @Builder
     @Getter
     @Setter
+    //TODO: почитать про эту конструкцию что это как она работает и как сделать лучше с помощью Page
+    //Всю эту конструкцию через наследование сделать можно(речь  скорее всего идет про Page), посмотреть повтор - там подробнее
     public static class Meta {
         private long total_items;
         private int total_pages;
