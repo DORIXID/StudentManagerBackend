@@ -1,6 +1,5 @@
 package dev.vortsu.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,11 +24,11 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "password_id", nullable = false)
-    private Password password;
+    private PasswordEntity password;
 
     private boolean enabled;
 
-    public Password getPassword() {
+    public PasswordEntity getPassword() {
         return password;
     }
 

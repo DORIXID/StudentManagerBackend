@@ -24,14 +24,14 @@ public class Initializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user;
+        UserEntity user;
 
         if (userRepository.count() == 0) {
 
-            Password password = new Password();
+            PasswordEntity password = new PasswordEntity();
             password.setPassword(encoder.encode("123456"));
 
-            user = new User();
+            user = new UserEntity();
             user.setUserName("student1");
             user.setRole(Role.STUDENT);
             user.setEnabled(true);
@@ -39,47 +39,47 @@ public class Initializer implements CommandLineRunner {
 
             userRepository.save(user);
 
-            Student student = new Student();
+            StudentEntity student = new StudentEntity();
             student.setUser(user);
             student.setName("Иван");
             student.setSurname("Иванов");
             student.setAge(20);
             studentRepository.save(student);
 
-            for (int i = 2; i <= 5; i++) {
+            for (int i = 2; i <= 20; i++) {
 
-                password = new Password();
+                password = new PasswordEntity();
                 password.setPassword(encoder.encode("student" + i));
 
-                user = new User();
-                user.setUserName("student" + i);
+                user = new UserEntity();
+                user.setUserName(Math.random() + "student" + i);
                 user.setRole(Role.STUDENT);
                 user.setEnabled(true);
                 user.setPassword(password);
                 user = userRepository.save(user);
 
-                student = new Student();
+                student = new StudentEntity();
                 student.setUser(user);
-                student.setName("Студент" + i);
+                student.setName(Math.random() + "Студент" + i);
                 student.setSurname("Фамилия" + i);
                 student.setAge(18 + i);
                 studentRepository.save(student);
             }
 
-            password = new Password();
+            password = new PasswordEntity();
             password.setPassword(encoder.encode("admin"));
 
-            user = new User();
+            user = new UserEntity();
             user.setUserName("admin");
             user.setRole(Role.ADMIN);
             user.setEnabled(true);
             user.setPassword(password);
             userRepository.save(user);
 
-            password = new Password();
+            password = new PasswordEntity();
             password.setPassword(encoder.encode("teacher"));
 
-            user = new User();
+            user = new UserEntity();
             user.setUserName("teacher");
             user.setRole(Role.TEACHER);
             user.setEnabled(true);

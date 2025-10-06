@@ -10,9 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "passwords")
-public class Password {
+public class PasswordEntity {
 
-    //TODO: добавить дтохам приписку Entity
     private String password;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

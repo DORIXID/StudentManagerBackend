@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Table(name = "students")
-public class Student {
+public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,5 +19,5 @@ public class Student {
     private Integer age;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
 }

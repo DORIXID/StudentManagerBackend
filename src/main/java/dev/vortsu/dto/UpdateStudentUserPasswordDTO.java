@@ -22,5 +22,9 @@ public class UpdateStudentUserPasswordDTO {
     private String surname;
     @Min(value = 15)
     private Integer age;
+    @Size(min = 6, max = 30)
+    private String password;
+    @Size(min = 3, max = 30)
+    private String userName;
     //TODO: сделать отдельный путь для обновления userName пароля а так же сделать типо isChenged
 }

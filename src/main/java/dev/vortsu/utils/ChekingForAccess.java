@@ -13,13 +13,13 @@ public class ChekingForAccess {
 
     private final StudentRepository studentRepository;
 
-    public boolean authenticationCheck(Long id, Authentication authentication) {
+    public boolean authenticationCheck(Long userId, Authentication authentication) {
         for (GrantedAuthority authority : authentication.getAuthorities()) {
             if (authority.getAuthority().equals("TEACHER") || authority.getAuthority().equals("ADMIN")) {
                 return true;
             }
-            Long userId = studentRepository.findByUser_UserName(authentication.getName()).orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found")).getId();
-            return userId.equals(id);
+            Long foundUserId = studentRepository.findStudentByUsername(authentication.getName()).orElseThrow(() -> new EntityNotFoundException("User with id " + userId + " not found")).getId();
+            return foundUserId.equals(userId);
         }
         return true;
     }

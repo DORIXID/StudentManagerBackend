@@ -1,13 +1,11 @@
 package dev.vortsu.mapper;
 
 
-import dev.vortsu.dto.UserDTO;
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
-import dev.vortsu.entity.User;
+import dev.vortsu.entity.UserEntity;
 import org.mapstruct.*;
 
-//TODO: не использовать camel case
 @Mapper(componentModel = "spring", uses = {PasswordMapper.class})
 public interface UserMapper {
 
@@ -15,7 +13,7 @@ public interface UserMapper {
         @Mapping(target = "enabled", expression = "java(true)")
         @Mapping(target = "role", expression = "java(dev.vortsu.entity.Role.STUDENT)")
         @Mapping(target = "password", source = "dto")
-        User toEntityFromUserName(CreateStudentUserPasswordDTO dto);
+        UserEntity toEntityFromUserName(CreateStudentUserPasswordDTO dto);
 
 
         @Mapping(target = "id", ignore = true)
@@ -24,5 +22,5 @@ public interface UserMapper {
         @Mapping(target = "role", expression = "java(dev.vortsu.entity.Role.STUDENT)")
         @Mapping(target = "password", source = "dto")
         @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-        void updateEntityFromUserName(UpdateStudentUserPasswordDTO dto, @MappingTarget User user);
+        void updateEntityFromUserName(UpdateStudentUserPasswordDTO dto, @MappingTarget UserEntity user);
 }
