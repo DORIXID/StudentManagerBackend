@@ -3,11 +3,13 @@ package dev.vortsu.services;
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
 import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
- import dev.vortsu.entity.StudentEntity;
+import dev.vortsu.dto.UserUpdateDTO;
+import dev.vortsu.entity.StudentEntity;
 import dev.vortsu.mapper.StudentMapper;
+import dev.vortsu.mapper.UserMapper;
 import dev.vortsu.repositories.StudentRepository;
 import dev.vortsu.repositories.UserRepository;
-import dev.vortsu.utils.ChekingForAccess;
+import dev.vortsu.utils.CheckingForAccess;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -22,22 +24,29 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final UserRepository userRepository;
     private final StudentMapper studentMapper;
-    private final ChekingForAccess chekingForAccess;
+    private final CheckingForAccess checkingForAccess;
+    private final UserMapper userMapper;
     private Sort sort;
 
     public void createStudent(CreateStudentUserPasswordDTO dto) {
         studentRepository.save(studentMapper.toEntityFromUserStudent(dto));
     }
 
-    public void editStudent(UpdateStudentUserPasswordDTO dto, Authentication authentication){
-        if (chekingForAccess.authenticationCheck(dto.getId(), authentication)) studentRepository.findById(dto.getId()).
-                ifPresent(student -> studentMapper.updateEntityFromUserStudent(dto, student));
+    public void editStudent(StudentDTO dto, Authentication authentication){
+        if (checkingForAccess.authenticationCheck(dto.getId(), authentication)) studentRepository.findById(dto.getId()).
+                ifPresent(student -> studentMapper.toEntity(dto));
     }
 
     public void deleteStudent(Long id, Authentication authentication) {
-        if(chekingForAccess.authenticationCheck(id, authentication)){
+        if(checkingForAccess.authenticationCheck(id, authentication)){
             studentRepository.deleteById(id);
         }
+    }
+
+    //Проверить как работает
+    public void updateUser(UserUpdateDTO dto, Authentication authentication) {
+        if (checkingForAccess.authenticationCheck(studentRepository.findById(dto.getId()).orElseThrow().getUser().getId(), authentication)) userRepository.findById(dto.getId()).
+                ifPresent(user -> userMapper.updateEntityFromUserUpdateDTO(dto, user));
     }
 
     public Page<StudentDTO> getAllStudents(Integer page, Integer limit, String sortBy, String searchedType, String searchedValue, Authentication authentication) {

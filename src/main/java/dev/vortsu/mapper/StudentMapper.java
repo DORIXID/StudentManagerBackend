@@ -17,18 +17,15 @@ public abstract class StudentMapper {
 
     public abstract StudentDTO toDto(StudentEntity student);
 
-    public Page<StudentDTO> toDto(Page<StudentEntity> pagedStudentEntities) {
-        if (pagedStudentEntities == null) {
-            return null;
-        }
-        List<StudentEntity> studentEntities = pagedStudentEntities.getContent();
-        List<StudentDTO> studentDTOS = new ArrayList<>();
-        for (StudentEntity studentEntity : studentEntities) {
-            StudentDTO dto = toDto(studentEntity);
-            studentDTOS.add(dto);
-        }
-        return new PageImpl<>(studentDTOS, pagedStudentEntities.getPageable(), pagedStudentEntities.getTotalElements());
+    public abstract List<StudentDTO> toDto(List<StudentEntity> studentEntities);
+
+    public Page<StudentDTO> toDto(Page<StudentEntity> page) {
+        List<StudentDTO> newPage = toDto(page.getContent());
+        return new PageImpl<>(newPage, page.getPageable(), page.getTotalElements());
     }
+
+    @Mapping(target = "id", ignore = true)
+    public abstract StudentEntity toEntity(StudentDTO dto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "dto")

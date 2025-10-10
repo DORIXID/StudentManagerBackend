@@ -3,6 +3,7 @@ package dev.vortsu.controllers;
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
 import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
+import dev.vortsu.dto.UserUpdateDTO;
 import dev.vortsu.entity.StudentEntity;
 import dev.vortsu.services.StudentService;
 
@@ -33,8 +34,13 @@ public class BaseController {
     }
 
     @PatchMapping(value="students", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void editStudent(@Validated @RequestBody UpdateStudentUserPasswordDTO newStudent, Authentication authentication)  {
+    public void editStudent(@Validated @RequestBody StudentDTO newStudent, Authentication authentication)  {
         studentService.editStudent(newStudent, authentication);
+    }
+
+    @PatchMapping(value = "students/user", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void editUser(@Validated @RequestBody UserUpdateDTO dto, Authentication authentication){
+        studentService.updateUser(dto, authentication);
     }
 
     @DeleteMapping(value = "students",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -42,8 +48,6 @@ public class BaseController {
         studentService.deleteStudent(student.getId(), authentication);
     }
 
-
-    //TODO: Возможно добавить эндпоинт для обновления пароля и прочего
     @GetMapping("students")
     public Page<StudentDTO> getAllStudentsts(
             @RequestParam(defaultValue = "0") Integer page,

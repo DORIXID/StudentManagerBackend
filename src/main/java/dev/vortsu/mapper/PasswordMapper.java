@@ -2,6 +2,7 @@ package dev.vortsu.mapper;
 
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
+import dev.vortsu.dto.UserUpdateDTO;
 import dev.vortsu.entity.PasswordEntity;
 import dev.vortsu.utils.PasswordEncoding;
 import org.mapstruct.*;
@@ -20,5 +21,10 @@ public abstract class PasswordMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", expression = "java(encoder.encode(dto.getPassword()))")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    public abstract void updateEntityFromPsssword(UpdateStudentUserPasswordDTO dto, @MappingTarget PasswordEntity password);
+    public abstract void updateEntityFromPassword(UpdateStudentUserPasswordDTO dto, @MappingTarget PasswordEntity password);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "password", expression = "java(encoder.encode(dto.getPassword()))")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    public abstract void updateEntityFromPassword(UserUpdateDTO dto, @MappingTarget PasswordEntity password);
 }

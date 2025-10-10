@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ChekingForAccess {
+public class CheckingForAccess {
 
     private final StudentRepository studentRepository;
 

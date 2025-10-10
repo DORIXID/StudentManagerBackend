@@ -26,5 +26,4 @@ public class UpdateStudentUserPasswordDTO {
     private String password;
     @Size(min = 3, max = 30)
     private String userName;
-    //TODO: сделать отдельный путь для обновления userName пароля а так же сделать типо isChenged
 }
