@@ -1,0 +1,143 @@
+2025-10-14 18:20:00 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-10-14 18:20:00 INFO  [main] dev.vortsu.VortsuApplication - Starting VortsuApplication using Java 21.0.8 with PID 11424 (C:\PROJECTS\java\javaServer\vortsu\build\classes\java\main started by DORIXID in C:\PROJECTS\java\javaServer\vortsu)
+2025-10-14 18:20:00 INFO  [main] dev.vortsu.VortsuApplication - No active profile set, falling back to 1 default profile: "default"
+2025-10-14 18:20:00 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-14 18:20:00 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 34 ms. Found 2 JPA repository interfaces.
+2025-10-14 18:20:01 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-10-14 18:20:01 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-10-14 18:20:01 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-10-14 18:20:01 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-10-14 18:20:01 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-10-14 18:20:01 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 960 ms
+2025-10-14 18:20:01 INFO  [main] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-14 18:20:01 INFO  [main] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-10-14 18:20:01 INFO  [main] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-10-14 18:20:01 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-14 18:20:01 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-10-14 18:20:01 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24f177f5
+2025-10-14 18:20:01 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-10-14 18:20:01 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 15.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-14 18:20:02 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - set client_min_messages = WARNING
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - alter table if exists students drop constraint if exists FKdt1cjx5ve5bdabmuuf3ibrwaq
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - alter table if exists users drop constraint if exists FK8b9ebmptosmrxe2jbgytxbav6
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop table if exists passwords cascade
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop table if exists students cascade
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop table if exists users cascade
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop sequence if exists passwords_seq
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop sequence if exists students_seq
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - drop sequence if exists users_seq
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create sequence passwords_seq start with 1 increment by 50
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create sequence students_seq start with 1 increment by 50
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create sequence users_seq start with 1 increment by 50
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create table passwords (id bigint not null, password varchar(255), primary key (id))
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create table students (age integer, id bigint not null, user_id bigint not null unique, name varchar(255), surname varchar(255), primary key (id))
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - create table users (enabled boolean not null, id bigint not null, password_id bigint not null unique, role varchar(255) check (role in ('STUDENT','ADMIN','TEACHER')), user_name varchar(255) not null unique, primary key (id))
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - alter table if exists students add constraint FKdt1cjx5ve5bdabmuuf3ibrwaq foreign key (user_id) references users
+2025-10-14 18:20:02 DEBUG [main] org.hibernate.SQL - alter table if exists users add constraint FK8b9ebmptosmrxe2jbgytxbav6 foreign key (password_id) references passwords
+2025-10-14 18:20:02 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-14 18:20:02 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-10-14 18:20:03 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-14 18:20:03 INFO  [main] o.s.s.p.JdbcUserDetailsManager - No authentication manager set. Reauthentication of users when changing passwords will not be performed.
+2025-10-14 18:20:03 INFO  [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2025-10-14 18:20:03 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-10-14 18:20:03 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-10-14 18:20:03 INFO  [main] dev.vortsu.VortsuApplication - Started VortsuApplication in 4.092 seconds (process running for 4.513)
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select count(*) from users ue1_0
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('users_seq')
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('passwords_seq')
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('students_seq')
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('users_seq')
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('passwords_seq')
+2025-10-14 18:20:04 DEBUG [main] org.hibernate.SQL - select nextval('students_seq')
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into students (age,name,surname,user_id,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into passwords (password,id) values (?,?)
+2025-10-14 18:20:05 DEBUG [main] org.hibernate.SQL - insert into users (enabled,password_id,role,user_name,id) values (?,?,?,?,?)
+2025-10-14 18:20:49 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-14 18:20:49 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-14 18:20:49 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-10-14 18:20:49 INFO  [http-nio-8080-exec-1] d.vortsu.controllers.BaseController - Принят запрос вида
+http://localhost:8080/api/base/students?page=0&limit=10&sortBy=id&searchedType=null&searchedValue=null
+2025-10-14 18:20:49 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - select se1_0.id,se1_0.age,se1_0.name,se1_0.surname,se1_0.user_id from students se1_0 order by se1_0.id offset ? rows fetch first ? rows only
+2025-10-14 18:20:49 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - select count(se1_0.id) from students se1_0
+2025-10-14 18:20:49 WARN  [http-nio-8080-exec-1] o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-10-14 18:20:49 INFO  [http-nio-8080-exec-2] d.vortsu.controllers.BaseController - Принят запрос вида
+http://localhost:8080/api/base/students?page=0&limit=10&sortBy=id&searchedType=null&searchedValue=null
+2025-10-14 18:20:49 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - select se1_0.id,se1_0.age,se1_0.name,se1_0.surname,se1_0.user_id from students se1_0 order by se1_0.id offset ? rows fetch first ? rows only
+2025-10-14 18:20:49 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - select count(se1_0.id) from students se1_0
+2025-10-14 23:18:13 INFO  [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-14 23:18:13 INFO  [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-10-14 23:18:13 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-14 23:18:13 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-10-14 23:18:13 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

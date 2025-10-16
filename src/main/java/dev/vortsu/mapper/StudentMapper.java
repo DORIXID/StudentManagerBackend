@@ -25,7 +25,16 @@ public abstract class StudentMapper {
     }
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "age", source = "age")
     public abstract StudentEntity toEntity(StudentDTO dto);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "surname", source = "surname")
+    @Mapping(target = "age", source = "age")
+    public abstract StudentEntity updateEntity(StudentDTO dto, @MappingTarget StudentEntity student);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "dto")

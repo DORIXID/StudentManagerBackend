@@ -16,6 +16,5 @@ public class UserUpdateDTO {
         private Long id;
         @Size(min = 3, max = 20)
         private String userName;
-        @JsonIgnore
         private String password;
 }

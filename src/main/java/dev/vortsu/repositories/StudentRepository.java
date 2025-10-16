@@ -21,8 +21,9 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 
     Optional<StudentEntity> findByUser(UserEntity user);
 
-    //TODO: конструктор запроса почитать. пока фильтрация только по name
+    //конструктор запроса почитать. пока фильтрация только по name
     @Query("SELECT s FROM StudentEntity s WHERE s.name ILIKE CONCAT('%', ?1, '%')")
-    Page<StudentEntity> findAll(String searchedValue, Pageable pageable);
-// Здесь пока нет String searchedType. Убрал потому, что пока тут затычка на месте searchedType потому что JPQL не позволяет использовать аргументы не как литералы
+    Page<StudentEntity> findByName(String searchedValue, Pageable pageable);
+    //TODO: http (GET POST and other), body, headers http-https, rest, rest api
+    //Здесь пока нет String searchedType. Убрал потому, что пока тут затычка на месте searchedType потому что JPQL не позволяет использовать аргументы не как литералы
 }

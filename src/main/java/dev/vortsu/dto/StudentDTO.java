@@ -15,9 +15,9 @@ import lombok.*;
 public class StudentDTO {
 
     private Long id;
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 50)
     private String name;
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 50)
     private String surname;
     @Min(value = 15)
     private Integer age;

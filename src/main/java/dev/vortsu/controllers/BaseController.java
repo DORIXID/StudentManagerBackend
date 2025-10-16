@@ -2,11 +2,11 @@ package dev.vortsu.controllers;
 
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
-import dev.vortsu.dto.UpdateStudentUserPasswordDTO;
 import dev.vortsu.dto.UserUpdateDTO;
 import dev.vortsu.entity.StudentEntity;
 import dev.vortsu.services.StudentService;
 
+import dev.vortsu.utils.exceptions.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +56,6 @@ public class BaseController {
             @RequestParam(required = false) String searchedType,
             @RequestParam(required = false) String searchedValue,
             Authentication authentication) {
-        System.out.println("\n\n...запрос принят...\n\n");
         return  studentService.getAllStudents(
                 page,
                 limit,
