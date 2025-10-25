@@ -4,9 +4,7 @@ import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
 import dev.vortsu.dto.UserUpdateDTO;
 import dev.vortsu.entity.StudentEntity;
-import dev.vortsu.services.StudentService;
-
-import dev.vortsu.utils.exceptions.CustomException;
+import dev.vortsu.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

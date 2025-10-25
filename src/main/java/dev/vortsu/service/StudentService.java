@@ -1,4 +1,4 @@
-package dev.vortsu.services;
+package dev.vortsu.service;
 
 import dev.vortsu.dto.CreateStudentUserPasswordDTO;
 import dev.vortsu.dto.StudentDTO;
